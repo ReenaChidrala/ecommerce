@@ -1,0 +1,178 @@
+.content-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+
+}
+.home-image-container{
+    width: 100%;
+  
+
+   
+}
+.home-image-container img{
+    width: 100%; /* Make the image take the full width of its container */  
+    height: 100%; /* Maintain aspect ratio */
+   object-fit: contain;
+}
+.front-content {
+    margin: 1rem 1rem 0 1rem;
+   
+}
+.front-content h1{
+   
+    font-size: 35px;
+    font-weight: 1000;
+    line-height: 34px; 
+}
+.para-container{
+    margin: 1rem;
+height: 50px;
+
+}
+.para-container-para{
+   color:  #00000099;
+   font-family: Satoshi;
+font-size: 14px;
+
+}
+.button-container{
+display: flex;
+margin: 1.5rem 0;
+justify-content: center;
+}
+
+.shop-now-button {
+    width: 358px;
+    height: 48px;
+    background-color: black;
+    color: white;
+    border-radius: 40px;
+}
+.brands-qauality-details{
+   
+    display: flex;
+   flex-wrap: wrap;
+   font-size: smaller;
+  justify-content: center;
+  align-items: center;
+gap: 1.5rem;
+height: 140px;
+
+
+}
+
+.para{
+    display: block;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    color: hsla(0, 0%, 50%, .807);
+   
+}
+.nummbers-bold{
+  font-size: 1.5rem;
+  font-weight: bold;
+   
+}
+.reight-side{
+    background-color: #F2F0F1;
+   
+ 
+}
+.brands-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+
+@media (min-width:768px) {
+
+    .home-image-container {
+  
+        width: 40%;
+        height:80vh;  
+   
+    }
+    
+    .content-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: #F2F0F1;
+    }
+    
+    .home-image-container img {
+        width: 100%; /* Default: Full width for the container */
+  height: 100%; /* Maintain aspect ratio */
+  object-fit: contain;
+    }
+    .reight-side{
+        width: 60%;
+   
+        margin: 2rem 1rem 0 3rem;
+       
+    }
+    .button-container{
+       
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+        justify-content: start;
+    
+    }
+    .brands-qauality-details{
+        margin-left: 1rem;
+        justify-content: start;
+        gap: 20px;
+
+    }
+    .shop-now-button{
+        width: 150px;
+    height: 42px;
+    }
+    .nummbers-bold{
+        font-size: 1.9rem;
+        font-weight: 640;
+       
+    }
+    .front-content h1{
+   
+        font-size: 39px;
+        font-weight: 1060;
+        line-height: 38px; 
+        margin-bottom: 30px;
+    }
+   
+}
+  @media (min-width:1025px) {
+    .front-content h1{
+    
+        font-size: 50px;
+        font-weight: 800;
+        line-height: 55px; 
+        margin-bottom: 30px;
+        width: 28rem;
+    }
+    .para-container-para{
+        width: 30rem;
+    
+    }
+    .reight-side{
+       
+        margin: 3rem 1rem 0 4rem;
+    }
+    .brands-qauality-details{
+        gap: 70px;
+    }
+    .nummbers-bold{
+        font-size: 2.5rem;
+        font-weight: 600;
+       
+    }
+  }
+ 
+  

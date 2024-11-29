@@ -1,0 +1,141 @@
+
+.left-side{
+    display:flex;
+   gap: 12px;
+   padding: 10px;
+}
+.hamburgure{
+ margin-top: 3px;
+   
+}
+.test{
+    font-weight: 800;
+    font-size: 25px;
+    line-height: 30.24px; 
+
+}
+.icons{
+
+    align-items: center;
+    display: flex;
+    gap: 12px;
+}
+.trend_navbar_options{
+    display: none;
+}
+.search_input_container{
+    display: none;
+}
+.mobile_menu{
+   
+    
+        display: none; /* Default to hidden */
+        background-color: #fff;
+        position: absolute;
+        top: 55px;/* Adjust to match you r header height */
+        left: 0;
+        width: 50%;
+        padding: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        /* border: 1px solid; */
+    
+
+}
+.mobile_menu.visible {
+    display: block; /* Show the menu */
+}
+.flex{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    box-shadow: 0px 2px #f2f0f1;
+  
+}
+.main-nav-container{
+    position: sticky;
+    top: 0;
+background-color: white;
+width: 100%;
+}
+
+
+@media (min-width:768px) {
+   
+ .hamburgure{
+    display: none;
+ }
+ .trend_navbar_options{
+    display: flex;
+
+  gap: 24px;
+  margin-left: 10px;
+  align-items: center;
+  justify-content: center;
+ }
+ .left-side{
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    
+ }
+ .human{
+   
+    margin-right: 30px;
+ }
+ .icons{
+
+   gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+   
+ }
+ .search_input_container {
+    display: block;
+    flex: 1;
+    margin-left:25px;
+    margin-right: 20px;
+    position: relative;
+    display: flex;
+    gap: 10px;
+    
+  
+ }
+ .search_input {
+    padding: 10px 40px;
+    border-radius: 20px;
+    width: 100%;
+   
+    background-color:#F2F0F1;
+    border: none;
+    /* position: absolute; */
+  
+  }
+.search_icon{
+    position: absolute;
+    top: 50%;
+    left: 10px; 
+    transform: translateY(-50%);
+    width: 20px; /* Set the icon size */
+    height: 20px; /* Match the width for consistent scaling */
+    pointer-events: none;
+    
+
+   
+}
+.search{
+    display: none;
+}
+.mobile_menu{
+    display: none;
+}
+.search_input::placeholder {
+    color: #aaa; /* Placeholder text color */
+  
+}
+
+    
+}

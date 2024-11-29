@@ -1,0 +1,48 @@
+.customer-comments-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    gap: 10px;
+    padding: 1rem 2rem;
+  }
+  
+  .stars-rating {
+    color: #ffc633;
+    font-size: 20px;
+  }
+  
+  .customer-comment-name {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0.5rem 0;
+  }
+  
+  .customer-comment {
+    border: 1px solid #cdc3c8;
+    padding: 1.5rem 1rem;
+    border-radius: 5%;
+    width: 100%; /* Full width for mobile */
+    max-width: 400px; /* Limit width for larger devices */
+  }
+  
+  .comments-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  @media (min-width: 768px) {
+    .comments-container {
+      flex-direction: row; /* Horizontal layout on larger screens */
+      flex-wrap: wrap; /* Allow wrapping if necessary */
+    }
+  
+    .customer-comment {
+      width: calc(33% - 20px); /* Adjust width for three items per row */
+      margin: 10px; /* Add spacing between items */
+    }
+  }
+  

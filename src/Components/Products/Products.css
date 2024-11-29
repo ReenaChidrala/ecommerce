@@ -1,0 +1,145 @@
+.section-product-main-container{
+
+   overflow-x:hidden ;
+
+
+
+}
+.products-container {
+    display: flex;
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    gap: 30px;
+   
+}
+.product-main-container{
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+.products-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Edge */
+}
+
+.section-product-main-container{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+   
+}
+.section-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.view-all-button-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5rem;
+   
+  
+ 
+}
+.product {
+   
+    padding: 4%;
+    width: 200px;
+    background-color:  #f2f0f1;
+    border-radius: 20px;
+  
+   
+}
+.new-arrival-text {
+  font-size: 32px;
+   font-weight: 700;
+  
+}
+.product-details{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.section-header{
+    margin: 1rem;
+}
+.top-selling-text{
+    font-size: 32px;
+    font-weight: 700;
+}
+.view-all-button{
+    width: 100%;
+    border-radius: 30px;
+    background-color: white;
+    border:2px solid #d6d4d5;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.product_img{
+    width: 160px;
+    height: 180px;
+}
+.product_img img{
+    width: 100%;
+   height: 100%;
+
+}
+.product_price{
+  
+    width: 190px;
+}
+@media (min-width:768px) {
+    .product-main-container{
+     
+        margin: 5rem 5rem 1rem 5rem;
+
+    }
+    .products-container {
+       
+        overflow-x: scroll;
+
+    }
+   
+    .product {
+        width: 300px;
+        margin: 2rem 0 2rem 5rem;
+        background-color: #F0EEED;
+        padding: 2%;
+        border-radius: 20px;
+        cursor: pointer;
+      
+
+    }
+    
+.product-image:hover {
+    transform: scale(1.1);
+}
+
+.product-image {
+    transition: transform 0.5s;
+}
+  
+    .new-arrival-text {
+        margin: 2rem;
+        font-size: 48px;
+        font-weight: 700;
+    }
+    .section-product-main-container{
+        overflow-x: hidden;
+    }
+    .top-selling-text {
+        font-size: 48px;
+        font-weight: 700;
+        border-top: 1px solid #0000001A;
+        padding-top: 2.5rem;
+    }
+    .view-all-button{
+        width: 20%;
+        cursor: pointer;    
+    }
+
+}

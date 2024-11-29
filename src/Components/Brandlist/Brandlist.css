@@ -1,0 +1,19 @@
+.brand-logo-list{
+    display: flex;
+    justify-content: space-evenly;
+   flex-wrap: wrap;
+    background-color: black;
+    color: white;
+    padding: 1.5rem 0 1.5rem 0;
+    gap: 15px;
+    line-height: 20px;
+
+  
+}
+.brand-logo {
+  
+   font-size: 24px;
+    font-family: 'Lora', serif;
+    font-weight: bold;
+    cursor: pointer;
+}
