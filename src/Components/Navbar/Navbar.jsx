@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, {  useContext, useState } from "react";
 import HamburgerMenu from '../Assets/HamburgerMenu.png';
 import search from '../Assets/search.png';
 import addtocard from '../Assets/addtocard.png';
 import human from '../Assets/human.png';
 import './Navbar.css';
 import vector from '../Assets/Vector.png';
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../pages/context/Context";
 
 const Navbar = () => {
     const [isHamBurgerClicked, setIsHamBurgerClicked] = useState(false);
+   const {cart}=useContext(CartContext);
+    const navigate = useNavigate(); 
+    const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
 
     return (
         <div className="main-nav-container">
@@ -41,7 +47,12 @@ const Navbar = () => {
 
 
                     <img src={search} alt="" className="search" />
-                    <img src={addtocard} alt="" className="addtocart" />
+                    <div className="cart-icon-container" onClick={() => navigate(`/cart`)}>
+                        <img src={addtocard} alt="cart" className="addtocart" />
+                        {cartCount > 0 && (
+                            <span className="cart-count">{cartCount}</span>
+                        )}
+                    </div>
                     <img src={human} alt="" className="human" />
                 </div>
             </div>

@@ -40,6 +40,8 @@ font-size: 14px;
 .button-container{
 display: flex;
 margin: 1.5rem 0;
+padding-left: 0.5rem;
+padding-right: 0.5rem;
 justify-content: center;
 }
 

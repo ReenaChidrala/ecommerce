@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import './Products.css'
-
+import { useNavigate } from "react-router-dom";
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -32,23 +34,26 @@ const Products = () => {
     }
 
     // Slicing for New Arrivals and Top Selling sections
-    const newArrivals = products.filter((data,index)=> index % 2 === 0).slice(0,5);
+    const newArrivals = products.filter((data, index) => index % 2 === 0).slice(0,4)
 
-    const topSelling = products.filter((data,index)=> index % 2!==0).slice(0,5);
+    const topSelling = products.filter((data, index) => index % 2 !== 0).slice(0,4)
 
 
     const renderProducts = (productList) => (
         <div className="products-container">
             {productList.map((product) => (
-                <div key={product.id} className="product">
+                <div key={product.id} className="product"
+                    onClick={() => navigate(`/product/${product.id}`)}  >
                     <ul className="product-details">
-                       <div className="product_img">
-                       <img className="product-image" src={product.image} alt={product.title}  />
-                       </div>
-                        <div className="product_price">
-                        <p>Price: ${product.price} <span style={{ color: "yellow" }}>★★★★</span>4/5</p>
+                        <div className="product_img">
+                            <img className="product-image" src={product.image} alt={product.title} />
                         </div>
-                        <p style={{ fontSize: "16px" }}>{product.title}</p>
+                        {/* <p className="prodict_title">{product.title}</p> */}
+                        <div className="product_price">
+                            <span className="product_stars" >★★★★ <span>4/5</span></span>
+                            <p className="product_price">${product.price}</p>
+                        </div>
+
                     </ul>
                 </div>
             ))}
@@ -65,11 +70,11 @@ const Products = () => {
                     {renderProducts(newArrivals)}
                 </section>
                 <div className="view-all-button-container">
-                    <button className="view-all-button">View All</button>
+                    <button className="view-all-button" onClick={()=>navigate(`/productlist`)} >View All</button>
                 </div>
             </section>
-            
-           <hr />
+
+            <hr />
 
             <section className="section-product-main-container">
                 <div className="section-header">
@@ -79,7 +84,7 @@ const Products = () => {
                     {renderProducts(topSelling)}
                 </section>
                 <div className="view-all-button-container">
-                    <button className="view-all-button">View All</button>
+                    <button className="view-all-button" onClick={()=>navigate(`/productlist`)}  >View All</button>
                 </div>
             </section>
         </div>

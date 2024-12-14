@@ -1,0 +1,21 @@
+.productListing_main_page {
+    display: flex;
+    flex-direction: column; /* Default for mobile views */
+}
+
+@media (min-width: 768px) {
+    .productListing_main_page {
+        display: flex;
+        flex-direction: row; /* Row layout for laptop view */
+        gap: 2rem;
+    }
+
+    .filter_left {
+        width: 35%; /* Filter takes 30% width */
+    }
+
+    .allProct_right {
+        width: 60%; /* Products take 70% width */
+    
+    }
+}

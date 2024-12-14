@@ -22,8 +22,8 @@
     border: 1px solid #cdc3c8;
     padding: 1.5rem 1rem;
     border-radius: 5%;
-    width: 100%; /* Full width for mobile */
-    max-width: 400px; /* Limit width for larger devices */
+    width: 100%; 
+    max-width: 400px;
   }
   
   .comments-container {
