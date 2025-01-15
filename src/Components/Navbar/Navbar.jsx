@@ -12,7 +12,9 @@ const Navbar = () => {
     const [isHamBurgerClicked, setIsHamBurgerClicked] = useState(false);
    const {cart}=useContext(CartContext);
     const navigate = useNavigate(); 
+    
     const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+    console.log(cartCount)
 
 
     return (

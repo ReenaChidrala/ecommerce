@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HiAdjustmentsVertical } from "react-icons/hi2";
 import './all-produts.css';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMdArrowRoundForward } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { Typography } from '@mui/material';
 const AllProducts = ({ filters, toggleFilterVisibility }) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null);
-    const [product, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([])
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [productsPerPage, setProductsPerPage] = useState(6);
-      const navigate = useNavigate();
+    const [allProduct, setAllProducts] = useState([]);
+    const [filterProducts, setFilterProducts] = useState([]);
+    
+
+    const containerRef = useRef(null); // To calculate available space
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -20,69 +22,34 @@ const AllProducts = ({ filters, toggleFilterVisibility }) => {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setProducts(data);
+                setAllProducts(data);
             } catch (error) {
                 setError(error.message);
             } finally {
-                setLoading(false);
+                setLoading(false);  
             }
         }
         fetchProducts();
     }, []);
-    useEffect(() => {
-        const updateProductsPerPage = () => {
-            if (window.innerWidth >= 768) {
-                setProductsPerPage(9); 
-            } else {
-                setProductsPerPage(6); 
-            }
-        };
-
-        updateProductsPerPage(); 
-
-        // Recalculate when the window is resized
-        window.addEventListener("resize", updateProductsPerPage);
-
-        // Clean up the event listener on component unmount
-        return () => {
-            window.removeEventListener("resize", updateProductsPerPage);
-        };
-    }, []);
 
     useEffect(() => {
-
-        let filtered = product;
+        let product = allProduct;
         if (filters.category) {
-            filtered = filtered.filter((product) => product.category === filters.category);
+            product = product.filter(product => product.category === filters.category);
         }
-
         if (filters.size) {
-
-            filtered = filtered.filter((prod) => prod.size === filters.size);
+            product = product.filter(product => product.size === filters.size);
         }
         if (filters.price) {
-            filtered = filtered.filter(
-              (prod) =>
-                prod.price >= filters.price.min && prod.price <= filters.price.max
-            );
-          }
+            product = product.filter(product => product.price >= filters.price.min && product.price <= filters.price.max);
+        }
+        setFilterProducts(product)
+    }, [filters, allProduct])
 
-        setFilteredProducts(filtered);  
-
-    }, [filters, product]);
+   
     
-
-    const handleNext = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex + productsPerPage >= filteredProducts.length ? 0 : prevIndex + productsPerPage
-        );
-    };
-    const handlePrevious = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? filteredProducts.length - productsPerPage : prevIndex - productsPerPage
-        );
-    };
-    const visibleProducts = filteredProducts.slice(currentIndex, currentIndex + productsPerPage);
+  
+    
 
 
     if (loading) {
@@ -92,7 +59,7 @@ const AllProducts = ({ filters, toggleFilterVisibility }) => {
         return <div>Error: {error}</div>;
     }
     return (
-        <section>
+        <section className="allproducts">
             <div className="productListing_container">
 
                 <div className="productListing_right_main_container">
@@ -101,21 +68,23 @@ const AllProducts = ({ filters, toggleFilterVisibility }) => {
                             <div>
 
                             </div>
-                            <div onClick={toggleFilterVisibility}>
+                            <div onClick={toggleFilterVisibility} className="product_hidjustment">
                                 <HiAdjustmentsVertical />
                             </div>
                         </div>
                         <div className="productListing_main_conatiner">
-                            {visibleProducts.map((product) => (
+                            {filterProducts.length > 0 ? (filterProducts.map((product) => (
                                 <div key={product.id} className=""
-                                onClick={() => navigate(`/product/${product.id}`)}>
+                                    onClick={() => navigate(`/product/${product.id}`)}>
                                     <div className="productListing_main_img_conatiner">
                                         <div className="productListing_img_conatiner">
                                             <img src={product.image} alt={product.title} className="productListing_img" />
                                         </div>
                                         <div className="productListing_product_details">
                                             <div className='productListing_product_title_container'>
-                                                {/* <p className="sujested_product_title">{product.title}</p> */}
+                                                <Typography className="sujested_product_title" noWrap>
+                                                    {product.title}
+                                                </Typography>
                                             </div>
                                             <div className="productListing_product_price_container">
                                                 <span className="product_stars" >★★★★ <span>4/5</span></span>
@@ -125,28 +94,31 @@ const AllProducts = ({ filters, toggleFilterVisibility }) => {
                                     </div>
                                 </div>
 
-                            ))}
+                            ))) : (<div>No products found for the selected.</div>)}
                         </div>
                         <hr className="productListing_hr" />
-                        <div className="pagination_buttons">
+                        {/* <div className="pagination_buttons">
                             <div className="previousAndNextButton_main_conatiner">
                                 <div className="previousAndNextButton">
                                     <IoMdArrowRoundBack />
                                 </div>
                                 <div className="previousAndNextText">
-                                    <button onClick={handlePrevious} disabled={currentIndex === 0} className="prev_button">Previous</button>
+                                    <button onClick={handlePrevious} disabled={currentPage === 0} className="prev_button">Previous</button>
 
                                 </div>
                             </div>
                             <div className="previousAndNextButton_main_conatiner">
                                 <div className="previousAndNextText">
-                                    <button onClick={handleNext} disabled={currentIndex + productsPerPage >= product.length} className="next_button">Next</button>
+                                    <button onClick={handleNext} disabled={
+                                        (currentPage + 1) * productsPerPage >=
+                                        filterProducts.length
+                                    } className="next_button">Next</button>
                                 </div>
                                 <div className="previousAndNextButton">
                                     <IoMdArrowRoundForward />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

@@ -3,6 +3,9 @@ import { HiAdjustmentsVertical } from "react-icons/hi2";
 import './filter.css'
 import { IoIosArrowDown } from "react-icons/io";
 import { FaX } from "react-icons/fa6";
+import Modal from 'react-modal';
+import Slider from '@mui/joy/Slider';
+
 
 const Filter = ({ isVisible, setIsVisible, applyFilter }) => {
     const [selectedSize, setSelectedSize] = useState(null);
@@ -15,28 +18,25 @@ const Filter = ({ isVisible, setIsVisible, applyFilter }) => {
         setIsVisible(false);
     }
     const handleSizeClick = (size) => {
-        setSelectedSize(size)
+        
+        setSelectedSize((prevSize)=>
+            prevSize===size?null:size );  
     }
     const handleCategoryClick = (category) => {
-        setSelectedCategory(category); // Set selected category
+        setSelectedCategory((prevcategory)=>
+            prevcategory===category?null:category);
     };
-    const handlePriceChange = (e) => {
-        const { name, value } = e.target;
-        setPriceRange((prev) => ({
-            ...prev,
-            [name]: Number(value),
-        }));
-    };
+    
     const handleApplyFilter = () => {
         const appliedFilters = {
             size: selectedSize,
             category: selectedCategory,
-            price:priceRange,
+            price: priceRange,
         };
         applyFilter(appliedFilters);
     };
     return (
-        <section>
+        <section className="filter">
             <div className={`productListing_left_main_container ${isVisible ? 'visible' : 'non'}`}>
                 <div className="filter_main_header_conatiner">
                     <div className="filter_text_conatiner">
@@ -69,29 +69,30 @@ const Filter = ({ isVisible, setIsVisible, applyFilter }) => {
                             <p className="filter_yext">Price </p>
                         </div>
                         <div>
-                            <IoIosArrowDown />
+                            {/* <IoIosArrowDown /> */}
                         </div>
                         <div className="price_slider_container">
-                            <div className="range_slider">
-                                <input
-                                    type="range"
-                                    name="min"
-                                    min="0"
-                                    max="1000"
-                                    value={priceRange.min}
-                                    onChange={handlePriceChange}
-                                    className="price_slider_left"
-                                />
-                                <input
-                                    type="range"
-                                    name="max"
-                                    min="0"
-                                    max="1000"
-                                    value={priceRange.max}
-                                    onChange={handlePriceChange}
-                                    className="price_slider_right"
-                                />
-                            </div>
+                            <Slider
+                                value={[priceRange.min, priceRange.max]}
+                                onChange={(e, newValue) => setPriceRange({ min: newValue[0], max: newValue[1] })}
+                                valueLabelDisplay="auto"
+                                min={0}
+                                max={1000}
+                                sx={{
+                                    color: "black", // The color of the slider thumb and track
+                                    '& .MuiSlider-thumb': {
+                                        backgroundColor: "black", // Thumb color
+                                    },
+                                    '& .MuiSlider-rail': {
+                                        background:" #F0F0F0", // Rail background color
+                                    },
+                                    '& .MuiSlider-track': {
+                                        backgroundColor: "black", // Active track color
+                                    },
+                                }}
+                            />
+
+
                         </div>
                         <div className="price_labels">
                             <span>Min: ${priceRange.min}</span>

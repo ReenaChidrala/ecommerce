@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './Products.css'
 import { useNavigate } from "react-router-dom";
+import { Typography } from '@mui/material';
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -34,9 +35,9 @@ const Products = () => {
     }
 
     // Slicing for New Arrivals and Top Selling sections
-    const newArrivals = products.filter((data, index) => index % 2 === 0).slice(0,4)
+    const newArrivals = products.filter((data, index) => index % 2 === 0).slice(0, 4)
 
-    const topSelling = products.filter((data, index) => index % 2 !== 0).slice(0,4)
+    const topSelling = products.filter((data, index) => index % 2 !== 0).slice(0, 4)
 
 
     const renderProducts = (productList) => (
@@ -48,10 +49,16 @@ const Products = () => {
                         <div className="product_img">
                             <img className="product-image" src={product.image} alt={product.title} />
                         </div>
-                        {/* <p className="prodict_title">{product.title}</p> */}
-                        <div className="product_price">
-                            <span className="product_stars" >★★★★ <span>4/5</span></span>
-                            <p className="product_price">${product.price}</p>
+                        <div className="product_details">
+                            <div className="product_details_title">
+                            <Typography className="product_title" nowep>
+                               {product.title}
+                            </Typography>
+                            </div>
+                            <div className="product_price_container">
+                                <span className="product_stars" >★★★★ <span>4/5</span></span>
+                                <p className="product_price">${product.price}</p>
+                            </div>
                         </div>
 
                     </ul>
@@ -70,7 +77,7 @@ const Products = () => {
                     {renderProducts(newArrivals)}
                 </section>
                 <div className="view-all-button-container">
-                    <button className="view-all-button" onClick={()=>navigate(`/productlist`)} >View All</button>
+                    <button className="view-all-button" onClick={() => navigate(`/productlist`)} >View All</button>
                 </div>
             </section>
 
@@ -84,7 +91,7 @@ const Products = () => {
                     {renderProducts(topSelling)}
                 </section>
                 <div className="view-all-button-container">
-                    <button className="view-all-button" onClick={()=>navigate(`/productlist`)}  >View All</button>
+                    <button className="view-all-button" onClick={() => navigate(`/productlist`)}  >View All</button>
                 </div>
             </section>
         </div>

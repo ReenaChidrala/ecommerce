@@ -6,6 +6,7 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import './CartListing.css'
 import { CartContext } from "../context/Context";
 import { FaArrowRight } from "react-icons/fa6";
+import { Typography } from "@mui/material";
 const CartListing = () => {
 
     const navigate = useNavigate();
@@ -47,14 +48,14 @@ const CartListing = () => {
 
 
 
-    if (cart.length===0) return <div>Your cart is empty!</div>;
+    if (cart.length === 0) return <div>Your cart is empty!</div>;
 
     const handleHome = () => {
         navigate("/");
     }
     const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-    const discount = subtotal * 0.2; 
-    const deliveryFee = 5.0; 
+    const discount = subtotal * 0.2;
+    const deliveryFee = 5.0;
     const total = subtotal - discount + deliveryFee;
 
     return (
@@ -85,8 +86,15 @@ const CartListing = () => {
                                             <img src={item.image} alt="" className="cart_img_container" />
                                         </div>
                                         <div className="cart_product_details">
-                                            <p className="cart_product_title">{item.title}</p>
-                                            <p className="cart_product_size cart_p">Size: <span style={{fontSize:"12px"}}>{item.size}</span> </p>
+                                            <div>
+                                                <Typography className="cart_product_title" noWrap
+                                                    sx={{
+                                                        fontSize: { xs: '12px', md: '14px' },
+                                                        fontWeight: { xs: '700', md: '700' },
+                                                    }}>
+                                                    {item.title}</Typography>
+                                            </div>
+                                            <p className="cart_product_size cart_p">Size: <span style={{ fontSize: "12px" }}>{item.size}</span> </p>
                                             <p className="cart_product_color cart_p">Color: </p>
                                             <p className="cart_product_price">${item.price}</p>
                                         </div>
@@ -116,7 +124,7 @@ const CartListing = () => {
 
                     <div className="cart_right_main-container">
                         <div className="cart_left">
-                             <h1 className="cart_h1">Order Summary</h1>
+                            <h1 className="cart_h1">Order Summary</h1>
 
                             <div className="car_totalprice_details">
                                 <div className="cart_name">
@@ -132,7 +140,7 @@ const CartListing = () => {
                                         <p className="sub_toal">Discount(-20%)</p>
                                     </div>
                                     <div className="cart_sub_totla_price">
-                                        <p style={{color:'red'}}>${discount}</p>
+                                        <p style={{ color: 'red' }}>${discount}</p>
                                     </div>
                                 </div>
                                 <div className="cart_name">
@@ -143,22 +151,22 @@ const CartListing = () => {
                                         <p>${deliveryFee}</p>
                                     </div>
                                 </div>
-                                <hr  />
-                                <div className="cart_name " style={{marginTop:"5%"}} >
+                                <hr />
+                                <div className="cart_name " style={{ marginTop: "5%" }} >
                                     <div className="cart_sub_totla ">
-                                        <p className="sub_toal cart_price" style={{ fontSize: "13px",color:"black"}}>Total</p>
+                                        <p className="sub_toal cart_price" style={{ fontSize: "13px", color: "black" }}>Total</p>
                                     </div>
                                     <div className="cart_sub_totla_price e">
-                                        <p style={{fontWeight:"700",fontSize:"15px"}}>${total}</p>
+                                        <p style={{ fontWeight: "700", fontSize: "15px" }}>${total}</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="cart_promo_apply">
                                 <div className="add_promo_button">
-                                    <input type="text" className="cart_button" id="cart_promo" placeholder="Add promo code"  />
+                                    <input type="text" className="cart_button" id="cart_promo" placeholder="Add promo code" />
                                 </div>
                                 <div className="aply_button">
-                                    <button className="aply cart_button" style={{backgroundColor:"black",color:"white"}}>Apply</button>
+                                    <button className="aply cart_button" style={{ backgroundColor: "black", color: "white" }}>Apply</button>
                                 </div>
                             </div>
                             <div className="cart_ceckout_main_button">
@@ -169,7 +177,7 @@ const CartListing = () => {
                                     <FaArrowRight color="white" />
                                 </div>
                             </div>
-                            </div>
+                        </div>
 
 
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import './ProductDetalis.css';
 import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
@@ -7,6 +7,7 @@ import { CartContext } from '../context/Context';
 import { HiAdjustmentsVertical } from "react-icons/hi2";
 import { IoIosArrowDown } from "react-icons/io";
 import { ClipLoader } from "react-spinners";
+import { Typography } from '@mui/material';
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -18,6 +19,7 @@ const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [loadingCart, setLoadingCart] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const navigate = useNavigate();
 
 
   const decremetQuality = () => {
@@ -101,7 +103,13 @@ const ProductDetails = () => {
     setSelectedSize(size);
   };
 
-
+  const handleSuggestedProductClick = (id) => {
+    // Find the selected suggested product from the related products
+    const selectedProduct = relatedProducts.find((product) => product.id === id);
+    if (selectedProduct) {
+      setProduct(selectedProduct); // Update the product state to the selected one
+    }
+  };
 
 
 
@@ -133,7 +141,7 @@ const ProductDetails = () => {
           </div>
         </div>
         <div className="right_side_product_details_container">
-          <div className="product_details">
+          <div className="productd_details">
             <div className="product_detail_title">
               <p className="product_title">
                 {product.title}
@@ -143,7 +151,7 @@ const ProductDetails = () => {
               <span className="product_details_stars" >★★★★  <span>{product.rating.rate}</span></span>
             </div>
             <div className="product_details_price">
-              <p className="product_price"> ${product.price}</p>
+              <p className="productd_price"> ${product.price}</p>
             </div>
             <div className="Product_right_description">
               <p className="product_description">{product.description}</p>
@@ -293,13 +301,14 @@ const ProductDetails = () => {
           </div>
           <div className="sujestions_product_imgs">
             {relatedProducts.map((product) => (
-              <div className="sujested_product_img_main_container">
+              <div key={product.id} className="sujested_product_img_main_container" 
+              onClick={()=> handleSuggestedProductClick(product.id)}>
                 <div className="sujested_product_img_container">
                   <img src={product.image} alt={product.title} />
                 </div>
                 <div className="sujested_product_details">
                   <div className='sujested_product_title_container'>
-                    {/* <p className="sujested_product_title">{product.title}</p> */}
+                    <Typography className="sujested_product_title" noWrap>{product.title}</Typography>
                   </div>
                   <div className="sujested_product_price_container">
                     <span className="product_stars" >★★★★ <span>4/5</span></span>
